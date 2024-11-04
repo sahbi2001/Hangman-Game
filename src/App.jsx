@@ -1,20 +1,23 @@
-import Button from './components/Button/Button'
 import './App.css'
-import TextInput from './components/TextInput/TextInput'
-import TextInputForm from './components/TextInputForm/TextInputForm'
-import TextInputFormContainer from './components/TextInputForm/TextInputFormContainer'
 import { Route, Routes } from 'react-router-dom'
 import StartGame from './pages/StartGame'
 import PlayGame from './pages/PlayGame'
+import Home from './pages/Home'
+import { WordContext } from './Context/WordContext'
+import { useState } from 'react'
 
 function App() {
 
+  const[wordList,setWordList]=useState([]);
+  const[word,setWord]=useState('');
   return (
+    <WordContext.Provider value={{wordList,setWordList,word,setWord}}>
       <Routes>
         <Route path='/start' element={<StartGame />} />
         <Route path='/play' element={<PlayGame />} />
-        <Route path='/' element={<div>Home</div>} />
+        <Route path='/' element={<Home/>} />
     </Routes>
+    </WordContext.Provider>
   )
 }
 
